@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+root {
+    --shadow: 0px 2px 14px 1px rgba(3, 63, 8, 0.25);
+}
+
+root {
+    --gray: #939393
+}
+
+* {
+    font-family: "Nunito";  
+    color: #345733;
+}
+
+body {
+    margin: 0 0 0 0;
+    background-color: #E4E4E3;
+}
+
+button, label {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.text {text-align: center;}
+
+.container {
+    display: flex;
+    align-items: center;
+}
+.c {flex-direction: column;}
+.r {flex-direction: row;}
+
+
+#container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+#top-gradient {
+    background-image: linear-gradient(#7cab61, #487628);
+    position: fixed;
+    width: inherit;
+    height: 260px;
+}
+
+#gray-container {
+    background-color: #E4E4E3;   
+    border-radius: 64px 64px 0 0;
+    position: absolute;
+    width: inherit;
+    top: 130px;
+    bottom: 0;
+    justify-content: space-between;
+}
+
+#heading, #main-section, #footer {
+    width: inherit;
+    justify-content: center; 
+}
+
+/* HEADING */
+
+#logo {
+    position: relative;
+    overflow: visible;
+    margin: -104px 0 -36px 0;
+}
+
+
+h1{
+    color: #234423;
+    font-weight: 800;
+    font-size: 52px;
+    margin: 10px 0;
+}
+
+h2 {
+    /* color: #234423; */
+    font-size: 14px;
+    margin: 0 0;
+}
+
+/* SECTION */
+
+#modes-container {
+    margin: 30px 0;
+    width: 275px;
+    justify-content:space-around;
+}
+
+.mode-btn {
+    display: none;
+}
+
+label.mode-lbl {
+    color: #4A4A4A;
+    font-size: 12px; 
+    font-weight: 600;
+    border-radius: 50px;
+    border: 0.8px solid #C3C3C3;
+    width: 112px;
+    height: 28px;
+    justify-content: center;
+}
+
+input[type="radio"]:hover + label {
+    background-color: #C3C3C3;
+}
+
+input[type="radio"]:checked + label {
+    background-color: #589B56;
+    box-shadow: 0 2px 14px 1px rgba(0, 0, 0, 0.25);
+    border: 0.8px solid transparent;
+    color: white;
+}
+
+
+#dropdowns-container {
+    padding: 10px 10px;
+}
+
+.oblong {
+    background-color: white;
+    border-radius: 22px;
+    width: 275px;
+    height: 55px;
+    margin: 10px 10px;
+    position: relative;
+}
+
+.select-layer {
+    justify-content: space-between;
+    position: relative;
+    overflow: visible;
+}
+
+select{
+    color: #9B9B9B;
+    background-color: transparent;
+    border: none;
+    border-radius: 22px;
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    padding: 0 0 0 22px ;
+    font-size: 16px;
+    z-index: 1;
+}
+
+.caret.container {
+    width: 55px;
+    height: 55px;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+}
+
+.fa-caret-down {color: #689F38;}
+
+
+#two-layer, #three-layer, #four-layer, #five-layer {
+    display: none;
+}
+
+#add-container {
+    opacity: 0.3;
+}
+
+#add-text {
+    margin: 0 22px;
+    color: #000000;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.side-btn, .filler {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    background: transparent;
+    border: 0px solid black; 
+    padding: 0 0;
+}
+
+#plus, .filler {
+    display: flex;
+}
+
+.grips {cursor: grab;}
+.fa-circle, .fa-grip-lines {color: #939393; font-size: 12px;}
+.fa-solid{font-size: 16px;}
+.fa-xmark {color: #D66969;}
+.fa-plus {color: #7DB64C;}
+
+
+#generate-button {
+    color: white;
+    background-color: #589B56;
+    font-size: 26px;
+    font-weight: 800;
+    margin: 30px 0;
+    padding: 7px;
+    border: none;
+    box-shadow: 0px 2px 14px 1px rgba(3, 63, 8, 0.25);
+}
+
+#generate-button:active {
+    background-color: #8ABA88;
+    box-shadow: none;
+    border: 0.8px solid #C3C3C3;
+}
+
+footer {
+    /* min-height: 44px; */
+    margin: 20px 0 10px;
+}
+
+.foot-lbl {
+    font-size: 10px;
+    font-weight: 700;
+}
+
+input[type="checkbox"], #instructions-container {
+    display: none;
+}
+
+#list {
+    max-width: 320px;
+    padding-left: 20px;
+    font-size: 8px;
+}
