@@ -1,6 +1,7 @@
 let shownLayers = 1;
 
 
+
 function setMode() {
     let driveButton = document.getElementById("drive");
     let walkButton = document.getElementById("walk");
@@ -15,33 +16,39 @@ function setMode() {
 // SIDE BUTTONS
 
 function showLayers() {
-    if (shownLayers >= 1) {
-        document.getElementById("one-layer").style.display = "flex";
+    if (shownLayers == 1) {
+        document.getElementById("add-text").innerHTML = "Add destination"
+    } else {
+        document.getElementById("add-text").innerHTML = "Add another destination"
+
+        if (shownLayers >= 2) {
+            document.getElementById("two-layer").style.display = "flex";
+            
+        }
+    
+        if (shownLayers >= 3){
+            document.getElementById("three-layer").style.display = "flex";
+        }
+    
+        if (shownLayers >= 4){
+            document.getElementById("four-layer").style.display = "flex";
+        }
+    
+        if (shownLayers >= 5){
+            document.getElementById("five-layer").style.display = "flex";
+            document.getElementById("add-layer").style.display = "none";
+        }
     }
 
-    if (shownLayers >= 2) {
-        document.getElementById("two-layer").style.display = "flex";
-    }
-
-    if (shownLayers >= 3){
-        document.getElementById("three-layer").style.display = "flex";
-    }
-
-    if (shownLayers >= 4){
-        document.getElementById("four-layer").style.display = "flex";
-    }
-
-    if (shownLayers >= 5){
-        document.getElementById("five-layer").style.display = "flex";
-        document.getElementById("add-layer").style.display = "none";
-    } 
+     
 }
 
 function add() {
     shownLayers ++;
     showLayers();
-    console.log(shownLayers)
+    // console.log(shownLayers)
 }
+
 
 function remove(layer, select) {
     document.getElementById(select).selectedIndex = 0;
@@ -55,7 +62,8 @@ function remove(layer, select) {
             document.getElementById("add-layer").style.display = "flex";
         }
     }
-    console.log(shownLayers)
+    showLayers()
+    // console.log(shownLayers)
 }
 
 // SHOW MAP BUTTON
@@ -63,12 +71,12 @@ function remove(layer, select) {
 function showMap() {
     var printables = []
 
-    let mode = document.getElementsByName('mode');
+    let modes = document.getElementsByName('mode');
     let locations = document.getElementsByClassName("select");
 
-    for (i = 0; i < mode.length; i++) {
-        if (mode[i].checked) {
-            printables.push(mode[i].value);
+    for (i = 0; i < modes.length; i++) {
+        if (modes[i].checked) {
+            printables.push(modes[i].value);
         }   
     }
 
@@ -99,5 +107,4 @@ function showInstructions() {
         instdiv.style.display = "none";
         document.getElementById("foot-lbl").style.textDecoration = "none";
     }
-
 }
