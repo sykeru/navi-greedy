@@ -1,4 +1,6 @@
 let shownLayers = 1;
+const mainContainer = document.getElementById("container")
+const mapContainer = document.getElementById("map-container")
 
 
 
@@ -39,8 +41,6 @@ function showLayers() {
             document.getElementById("add-layer").style.display = "none";
         }
     }
-
-     
 }
 
 function add() {
@@ -73,6 +73,7 @@ function showMap() {
 
     let modes = document.getElementsByName('mode');
     let locations = document.getElementsByClassName("select");
+    let locContainers = document.getElementsByClassName("loc")
 
     for (i = 0; i < modes.length; i++) {
         if (modes[i].checked) {
@@ -87,10 +88,16 @@ function showMap() {
         }
     }
 
+    mainContainer.style.display = "none";
+    mapContainer.style.display = "flex"
 
-    alert(printables.join(" - "))
-    console.log(shownLayers)
+    console.log(printables.join(" - "), shownLayers)
 
+}
+
+function home() {
+    mainContainer.style.display = "flex";
+    mapContainer.style.display = "none"
 }
 
 // INSTRUCTIONS SA BABA

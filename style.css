@@ -188,7 +188,7 @@ select{
 }
 
 .grips {cursor: grab;}
-.fa-circle, .fa-grip-lines {color: #939393; font-size: 12px;}
+.fa-circle, .fa-grip-lines, .fa-light {color: #939393; font-size: 12px;}
 .fa-solid{font-size: 16px;}
 .fa-xmark {color: #D66969;}
 .fa-plus {color: #7DB64C;}
@@ -232,8 +232,21 @@ input[type="checkbox"], #instructions-container {
 
 
 /* MAP HTML */
+#map-container {
+    display: none;
+}
 
 #map {
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
+}
+
+#back-btn {
+    background-color: transparent;
+    border: none;
+    width: 70px;
+    height: 30px;
+    margin: 10px;
+    position: absolute;
+    display: flex;
 }

@@ -31,7 +31,6 @@
                 <div id="dropdowns-container" class="container c">
 
                     <div id="one-layer" class="select-layer container r" draggable="true">
-                        <!-- <button class="grips side-btn container" disabled><i class="fa-solid fa-grip-lines" id="grip-lines"></i></button> -->
                         <button class="grips side-btn container" disabled><i class="fa-regular fa-circle"></i></button>
                         <div class="container r oblong">
                             <select name="location" id="initial-location" class="select">
@@ -282,6 +281,11 @@
         </div>
     </div>
 
-<script src="script.js"></script>
+    <div id="map-container" class="container c">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3867.922988256832!2d120.88185386849814!3d14.199287501130373!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sph!4v1722178061049!5m2!1sen!2sph" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" id="map"></iframe>
+        <button id="back-btn"  onclick="home()"><img src="./pics/logo 2.png" alt="" width="75px"></button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
