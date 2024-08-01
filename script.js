@@ -1,110 +1,239 @@
+
 let shownLayers = 1;
-const mainContainer = document.getElementById("container")
-const mapContainer = document.getElementById("map-container")
+const mainContainer = document.getElementById("container");
+const mapContainer = document.getElementById("map-container");
+var mapMarkers;
 
 
+// MAP
 
-function setMode() {
-    let driveButton = document.getElementById("drive");
-    let walkButton = document.getElementById("walk");
+let map = L.map('map').setView([14.199962369320243, 120.88165030538508], 17);
 
-    if (walkButton.checked) {
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            minZoom: 17,
+            maxZoom: 20,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
 
-    } else if (driveButton.checked) {
-        
-    }
-}
+
+let redIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+
+let walkingNodes = {
+    n1: [14.196277536115117, 120.88048473198177], 
+    n2: [14.196386947852886, 120.88101718636738], 
+    gate1: [14.196550330772805, 120.8811120328926], // n3
+    n4: [14.196581534307029, 120.88120962738675], 
+    n5: [14.196700908852965, 120.88186877886329],  
+    umallGate: [14.196226935354984, 120.88232690663348], // n6
+    n7: [14.196789183816476, 120.88227153024586], 
+    n8: [14.196831438555485, 120.88239583026661], 
+    n9: [14.197006714249407, 120.88317920736223], 
+    n10: [14.197121596772789, 120.88339298869501], 
+    ncrdec: [14.197521350996606, 120.88354734845433], // n11
+    n12: [14.199746245883025, 120.88250814285626], 
+    n13: [14.198020308724766, 120.88332117218903], 
+    cafenr: [14.199142580689566, 120.88278193856135],  // n14
+    n15: [14.199594330244212, 120.88242006589563], 
+    n16: [14.196887541795128, 120.88268008494491],
+    cas: [14.199690800817008, 120.88210702489948], // n17
+    n18: [14.199469843288525, 120.8815474800787], 
+    n19: [14.199290925868068, 120.88100494500605], 
+    n20: [14.196658022103124, 120.8822134474104],
+    n21: [14.19917524261326, 120.88052716848183], 
+    n22: [14.199046222337312, 120.88054605011926], 
+    n23: [14.199210817045834, 120.88110943459264], 
+    n24: [14.199360832830043, 120.8812646039155], 
+    n25: [14.198724995744804, 120.88128766565913], 
+    n26: [14.198745357356013, 120.88147163314916], 
+    n27: [14.198680980891428, 120.88167568736277], 
+    n28: [14.198482253270202, 120.88184832017246], 
+    n29: [14.197887006874469, 120.88202702567908], 
+    osas: [14.1975639168527, 120.88221434203922], // n30
+    cashier: [14.198668512162984, 120.8811600775734], // n31
+    n32: [14.198541829165316, 120.8806691913583], 
+    n33: [14.198789565045198, 120.88060303386425],
+    n34: [14.198423353400164, 120.88070073085201], 
+    n35: [14.197943572207008, 120.88083543225723], 
+    n36: [14.197412597837634, 120.88098994933423], 
+    cspear: [14.197118529025133, 120.88232438676317], gym: [14.197118529025133, 120.88232438676317], // n37
+    dit: [14.199461271525124, 120.88045401999981], // n38
+    diet: [14.199814906774776, 120.88035705495039], // n39
+    n40: [14.200297253969339, 120.88024285431747], 
+    n41: [14.200560880471507, 120.88128696246018], 
+    oldCemds: [14.199920854979403, 120.88142911052366],  // n42
+    con: [14.200691592732083, 120.88176707788875], // n43
+    n44: [14.200792601357012, 120.88225926325826], 
+    biosci: [14.200351992087976, 120.88240593555676], // n45
+    n46: [14.200107099279563, 120.88242797923685], 
+    n47: [14.199922336221466, 120.88234888857088], 
+    n48: [14.19981873983606, 120.88226911888046], 
+    n49: [14.200904256609665, 120.88231504538345], 
+    n50: [14.201236132800622, 120.8822534056156], 
+    icc: [14.20146044773778, 120.88187787720294], // n51
+    rolle: [14.201216713940871, 120.88175712851812], // n52
+    n53: [14.201347900497797, 120.88218587018867], 
+    n54: [14.201578913449822, 120.88215466176614], 
+    cvmbs: [14.202824320783192, 120.8817141113035], // n55
+    n56: [14.196252337110307, 120.88035509193833], 
+    infirmary: [14.1975299451574, 120.88009747632331],  // n57
+    n58: [14.197831577827367, 120.88002138306873], 
+    n59: [14.199099005557365, 120.88036501499688], 
+    cdc: [14.199020002205854, 120.88006886089283],  // n60
+    gate2: [14.198967914916868, 120.87984806787658],  // n61
+    n62: [14.198869440978821, 120.87969031455314], 
+    chapel: [14.198553104443853, 120.87975048634994], // n63
+    ccj: [14.197996895127469, 120.87994033986014], // n64
+    saka: [14.198595870500526, 120.88592230227202], // n65
+    n66: [4.203575225751402, 120.88147914352867], 
+    ih2: [14.19636458131911, 120.88174765572329], // n67
+    n68: [14.196591350744373, 120.8813998262917], 
+    saluysoy: [14.2013023241157, 120.88243737661506], // n69
+    admin: [14.198874602132035, 120.88088691735506], // n70
+    n71: [14.199139106600429, 120.88085998914651],
+    ceit: [14.199371707815803, 120.88072659154814], // n72
+    dcee: [14.200192813538132, 120.88000305432064], // n73
+    ih1: [14.200029476951434, 120.88269540081875], // n74
+    n75: [14.196559881289307, 120.88125267401364], 
+    n76: [14.196653322198388, 120.88166248519967], 
+    n77: [14.199887351492938, 120.88247955567706], 
+    agriEco: [14.201045832661995, 120.88295040914448], // n78
+    n79: [14.200894933882308, 120.88154584627347], 
+    n80: [14.199521473841438, 120.88260734534613], 
+    newCemds: [14.199210621239656, 120.88292705697539], // n81 
+    resCenter: [14.199558609076924, 120.88276940687263], // n82
+    library: [14.199451796798918, 120.88248708461627], // n83
+    men: [14.196662007730925, 120.88271406736101],  // n84
+    women: [14.196772328807057, 120.88320718550389], // n85 
+    lshs: [14.19749059283419, 120.88071771123052],  // n86
+    quad: [14.1983393398538, 120.880349002049], // n87
+    gstand: [14.197968287000013, 120.88097082950239], // n88
+    grandstand: [14.197460063422387, 120.88109106173006], // n89
+    ced: [14.198738179336699, 120.88022170624139], // n90
+    physci: [14.200102882106703, 120.88159635778081], // n91
+    hostel: [14.200883112126727, 120.8826346238722], // n92
+};
+
+let drivingNodes = {
+    n1: [14.196145209443445, 120.88047920621668],
+    n2: [14.196269925716073, 120.88105940878651],
+    gate1: [14.196417979252814, 120.88116833590496], // n3
+    ih2: [14.196558395200634, 120.88170477772461], // n4
+    umallGate: [14.196730045382244, 120.88231712522484], //n5
+    cspear: [14.197103280611577, 120.88221903728476], // n6
+    gym: [14.197103280611577, 120.88221903728476], // n6
+    osas: [14.197523226783824, 120.88211309002659], // n7
+    men: [14.196901448077567, 120.88299851106639], // n8
+    women: [14.196901448077567, 120.88299851106639], // n8
+    n9: [14.19701277028041, 120.88333582206242],
+    n10: [14.197176661199238, 120.883494509740981],
+    n11: [14.197385262900508, 120.88357625229219],
+    ncrdec: [14.19753536543812, 120.8835654806105], // n12
+    n13: [14.198035377484384, 120.88333873945855],
+    saka: [14.198595870500526, 120.88592230227202], // n14
+    cafenr: [14.199162550836427, 120.88286098176932], // n15
+    newCemds: [14.199162550836427, 120.88286098176932], // n15
+    library: [14.199513492358149, 120.88268761049287], // n16
+    resCenter: [14.199513492358149, 120.88268761049287], // n16
+    n17: [14.199830541867167, 120.8825658156603],
+    ih1: [14.199973760637288, 120.88255115517087], // n18
+    biosci: [14.200369525009572, 120.88245191493203], // n19
+    hostel: [14.200837977722047, 120.88227682728754], // n20
+    agriEco: [14.200837977722047, 120.88227682728754], // n20
+    rolle: [14.200837977722047, 120.88227682728754], // n20
+    icc: [14.200837977722047, 120.88227682728754], // n20
+    saluysoy: [14.200837977722047, 120.88227682728754], // n20
+    n21: [14.201221714652572, 120.88219788618616],
+    n22: [14.201374771938006, 120.88223059035609],
+    n23: [14.201574839515395, 120.88220092986619],
+    cvmbs: [14.20291843249673, 120.88171453546005], // n24
+    con: [14.200707731224206, 120.88174352669958], // n25
+    n26: [14.200589993611857, 120.88128834072634],
+    dcee: [14.200310581983214, 120.8801883079434], // n27
+    diet: [14.199795757878713, 120.88028934513904],
+    dit: [14.199420671002848, 120.8803636585938], // n29
+    cas: [14.19967206758593, 120.88216310558921], // n30
+    n31: [14.199415622989496, 120.8815551570342],
+    oldCemds: [14.199978091737677, 120.8814166012408], // n32
+    physci: [14.199978091737677, 120.8814166012408], // n32
+    ceit: [14.19921136999935, 120.88099358649688], // n33
+    admin: [14.199067147455675, 120.88042770906304], // n34
+    cashier: [14.199067147455675, 120.88042770906304], // n34
+    quad: [14.198409710906528, 120.88060668006237], // n35
+    gstand: [14.197938115833228, 120.88073793504535], // n36
+    lshs: [14.197526313372452, 120.8808511320723], // n37
+    cdc: [14.198975612628367, 120.88009040138904], // n38
+    ced: [14.198975612628367, 120.88009040138904], // n38
+    gate2: [14.198919228785423, 120.8798360226431], // n39
+    n40: [14.198904590397282, 120.87979179771542],
+    n41: [14.198867433479585, 120.8796837143745],
+    chapel: [14.19853965397061, 120.87975106465345], // n42
+    n43: [14.198343295262477, 120.87976744405819],
+    ccj: [14.198010103523876, 120.87991147590711], // n44
+    n45: [14.198546914337523, 120.87988949910594],
+    n46: [14.197985668158324, 120.88003941510406],
+    infirmary: [14.19755275004072, 120.88015105468197], // n47
+    n48: [14.200140525035536, 120.88250921528268],
+};
 
 // SIDE BUTTONS
 
 function showLayers() {
-    if (shownLayers == 1) {
-        document.getElementById("add-text").innerHTML = "Add destination"
-    } else {
+    if (shownLayers >= 2) {
+        document.getElementById("two-layer").style.display = "flex";
         document.getElementById("add-text").innerHTML = "Add another destination"
+    };
 
-        if (shownLayers >= 2) {
-            document.getElementById("two-layer").style.display = "flex";
-            
-        }
-    
-        if (shownLayers >= 3){
-            document.getElementById("three-layer").style.display = "flex";
-        }
-    
-        if (shownLayers >= 4){
-            document.getElementById("four-layer").style.display = "flex";
-        }
-    
-        if (shownLayers >= 5){
-            document.getElementById("five-layer").style.display = "flex";
-            document.getElementById("add-layer").style.display = "none";
-        }
-    }
-}
+    if (shownLayers >= 3){
+        document.getElementById("three-layer").style.display = "flex";
+    };
+
+    if (shownLayers >= 4){
+        document.getElementById("four-layer").style.display = "flex";
+    };
+
+    if (shownLayers >= 5){
+        document.getElementById("five-layer").style.display = "flex";
+        document.getElementById("add-layer").style.display = "none";
+    };
+};
 
 function add() {
     shownLayers ++;
     showLayers();
     // console.log(shownLayers)
-}
-
+};
 
 function remove(layer, select) {
     document.getElementById(select).selectedIndex = 0;
     if (layer != "one-layer") {
-        if (shownLayers > 1) {
+        document.getElementById(layer).style.display = "none";
+        if (shownLayers == 1) {
+            document.getElementById("add-text").innerHTML = "Add destination"
+        } else if (shownLayers > 1) {
             shownLayers --;
-            document.getElementById(layer).style.display = "none";
-        }
-    
-        if (shownLayers < 5) {
-            document.getElementById("add-layer").style.display = "flex";
-        }
-    }
-    showLayers()
-    // console.log(shownLayers)
-}
+        };
+    };
 
-// SHOW MAP BUTTON
+    if (shownLayers < 5) {
+        document.getElementById("add-layer").style.display = "flex";
+    };
+    // map.removeLayer(mapMarker)
+};
 
-function showMap() {
-    var printables = []
-
-    let modes = document.getElementsByName('mode');
-    let locations = document.getElementsByClassName("select");
-    let locContainers = document.getElementsByClassName("loc")
-
-    for (i = 0; i < modes.length; i++) {
-        if (modes[i].checked) {
-            printables.push(modes[i].value);
-        }   
-    }
-
-    for (i=0; i < locations.length; i++) {
-        y = locations[i].value
-        if (y != "none") {
-            printables.push(y);
-        }
-    }
-
-    mainContainer.style.display = "none";
-    mapContainer.style.display = "flex"
-
-    console.log(printables.join(" - "), shownLayers)
-
-}
-
-function home() {
-    mainContainer.style.display = "flex";
-    mapContainer.style.display = "none"
-}
 
 // INSTRUCTIONS SA BABA
 
 function showInstructions() {
-    let box = document.getElementById("how-to")
-    let instdiv = document.getElementById("instructions-container")
+    let box = document.getElementById("how-to");
+    let instdiv = document.getElementById("instructions-container");
 
     if (box.checked) {
         instdiv.style.display = "block";
@@ -114,4 +243,61 @@ function showInstructions() {
         instdiv.style.display = "none";
         document.getElementById("foot-lbl").style.textDecoration = "none";
     }
+};
+
+// SHOW MAP BUTTON
+
+function showMap() {
+    mainContainer.style.display = "none";
+    mapContainer.style.display = "flex";
+    map.invalidateSize()
+
+    var printables = [];
+    mapMarkers = [];
+
+    let modes = document.getElementsByName('mode');
+    let locations = document.getElementsByClassName("select");
+    let options = document.getElementsByClassName("option");
+    let mode
+    
+
+    for (let i = 0; i < modes.length; i++) {
+        if (modes[i].checked) {
+            mode = modes[i].value
+        }   
+    };
+
+    printables.push(mode)
+    
+    var Nodes;
+
+    if (mode == "driving") {
+        Nodes = drivingNodes
+    } else {
+        Nodes = walkingNodes
+    }
+
+    let nodesArr = Object.values(Nodes);
+
+    for (let i = 0; i < locations.length; i++) {
+        let loc = locations[i].value;
+        let index = document.getElementById(locations[i].id).selectedIndex - 1;
+        if (loc != "none") {
+            printables.push(options[index].innerHTML);
+            var marker = new L.marker(Nodes[loc], {icon: redIcon}).addTo(map).bindPopup(options[index].innerHTML);
+            mapMarkers.push(marker);
+        }
+    };
+
+    // console.log(printables.join(" - "), shownLayers);
+    return mapMarkers;
+}
+
+function home() {
+    mainContainer.style.display = "flex";
+    mapContainer.style.display = "none";
+
+    for(let i=0; i < mapMarkers.length; i++) {
+        map.removeLayer(mapMarkers[i])
+    }  
 }

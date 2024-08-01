@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
-* {
+* { 
+    margin: 0;
+    padding: 0;
     font-family: "Nunito";  
     color: #345733;
 }
 
 body {
-    margin: 0 0 0 0;
     background-color: #E4E4E3;
 }
 
@@ -37,6 +38,7 @@ button, label, .oblong, .select {
     background-image: linear-gradient(#7cab61, #487628);
     position: fixed;
     width: inherit;
+    width: 100vw;
     height: 200px;
 }
 
@@ -234,19 +236,23 @@ input[type="checkbox"], #instructions-container {
 /* MAP HTML */
 #map-container {
     display: none;
+    flex-direction: column;
+    position:  relative;
 }
 
 #map {
     width: 100vw;
     height: 100dvh;
+    z-index: 1;
 }
 
 #back-btn {
     background-color: transparent;
     border: none;
-    width: 70px;
-    height: 30px;
+    width: 75px;
+    height: 75px;
     margin: 10px;
     position: absolute;
     display: flex;
+    z-index: 2;
 }

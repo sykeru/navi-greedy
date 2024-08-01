@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="./pics/logo 0.png">
     <title>Navi-Greedy</title>
@@ -22,10 +24,10 @@
 
             <section id="main-section" class="container c">
                 <div id="modes-container" class="container r">
-                    <input type="radio" name="mode" value="walking" id="walk" class="mode-btn" checked="checked" onclick="setMode()">
+                    <input type="radio" name="mode" value="walking" id="walk" class="mode-btn" checked="checked">
                     <label for="walk" id="is-walking" class="container mode-lbl btn">WALKING</label>
                     
-                    <input type="radio" name="mode" value="driving" id="drive" class="mode-btn" onclick="setMode()">
+                    <input type="radio" name="mode" value="driving" id="drive" class="mode-btn">
                     <label for="drive" id="is-driving" class="container mode-lbl">DRIVING</label>
                 </div>
                 <div id="dropdowns-container" class="container c">
@@ -36,36 +38,46 @@
                             <select name="location" id="initial-location" class="select">
                                 <option value="none" disabled selected>Choose location</option>
                                 <option value="admin" class="option">Admin Building</option>
+                                <option value="agriEco" class="option">Agri Eco Park</option>
+                                <option value="biosci" class="option">BioSci</option>
                                 <option value="cafenr" class="option">CAFENR</option>
                                 <option value="cas" class="option">CAS</option>
+                                <option value="cashier" class="option">Cashier</option>
                                 <option value="ccj" class="option">CCJ</option>
                                 <option value="cdc" class="option">CDC</option>
                                 <option value="ced" class="option">CED</option>
                                 <option value="ceit" class="option">CEIT</option>
+                                <option value="chapel" class="option">Chapel</option>
                                 <option value="con" class="option">CON</option>
                                 <option value="cspear" class="option">CSPEAR</option>
                                 <option value="cvmbs" class="option">CVMBS</option>
                                 <option value="dcee" class="option">DCEE</option>
                                 <option value="diet" class="option">DIET</option>
+                                <option value="dit" class="option">DIT</option>
                                 <option value="gate1" class="option">Gate 1</option>
                                 <option value="gate2" class="option">Gate 2</option>
-                                <option value="grandstand" class="option">Grandstand</option>      
+                                <option value="grandstand" class="option">Grandstand</option>   
+                                <option value="gym" class="option">Gymnasium</option>   
                                 <option value="hostel" class="option">Hostel Tropicana</option>
                                 <option value="icc" class="option">ICC</option>
                                 <option value="ih1" class="option">IH 1</option>
                                 <option value="ih2" class="option">IH 2</option>
                                 <option value="infirmary" class="option">Infirmary</option>
-                                <option value="lshs" class="option">LSHS</option>
                                 <option value="library" class="option">Library</option>
+                                <option value="lshs" class="option">LSHS</option>
+                                <option value="men" class="option">Men's Dormitory</option>
                                 <option value="ncrdec" class="option">NCRDEC</option>
-                                <option value="new cemds" class="option">New CEMDS</option>
+                                <option value="newCemds" class="option">New CEMDS</option>
+                                <option value="oldCemds" class="option">Old CEMDS</option>
                                 <option value="osas" class="option">OSAS</option>
-                                <option value="old cemds" class="option">Old CEMDS</option>
                                 <option value="physci" class="option">PhySci</option>
+                                <option value="quad" class="option">Quadrangle
                                 <option value="research center" class="option">Research Center</option>
-                                <option value="rolle hall" class="option">Rolle Hall</option>
+                                <option value="rolle" class="option">Rolle Hall</option>
+                                <option value="saka" class="option">Saka</option>
                                 <option value="saluysoy" class="option">Saluysoy</option>
-                                <option value="umall gate" class="option">UMall Gate</option>
+                                <option value="umallGate" class="option">UMall Gate</option>
+                                <option value="women" class="option">Women's Dormitory</option>
                             </select>
                             <div class="caret container">
                                     <i class="fa-solid fa-caret-down"></i>
@@ -80,36 +92,46 @@
                             <select name="location" id="second-location" class="second select">
                                 <option value="none" disabled selected>Choose destination</option>
                                 <option value="admin" class="option">Admin Building</option>
+                                <option value="agriEco" class="option">Agri Eco Park</option>
+                                <option value="biosci" class="option">BioSci</option>
                                 <option value="cafenr" class="option">CAFENR</option>
                                 <option value="cas" class="option">CAS</option>
+                                <option value="cashier" class="option">Cashier</option>
                                 <option value="ccj" class="option">CCJ</option>
                                 <option value="cdc" class="option">CDC</option>
                                 <option value="ced" class="option">CED</option>
                                 <option value="ceit" class="option">CEIT</option>
+                                <option value="chapel" class="option">Chapel</option>
                                 <option value="con" class="option">CON</option>
                                 <option value="cspear" class="option">CSPEAR</option>
                                 <option value="cvmbs" class="option">CVMBS</option>
                                 <option value="dcee" class="option">DCEE</option>
                                 <option value="diet" class="option">DIET</option>
+                                <option value="dit" class="option">DIT</option>
                                 <option value="gate1" class="option">Gate 1</option>
                                 <option value="gate2" class="option">Gate 2</option>
-                                <option value="grandstand" class="option">Grandstand</option>      
+                                <option value="grandstand" class="option">Grandstand</option>   
+                                <option value="gym" class="option">Gymnasium</option>   
                                 <option value="hostel" class="option">Hostel Tropicana</option>
                                 <option value="icc" class="option">ICC</option>
                                 <option value="ih1" class="option">IH 1</option>
                                 <option value="ih2" class="option">IH 2</option>
                                 <option value="infirmary" class="option">Infirmary</option>
-                                <option value="lshs" class="option">LSHS</option>
                                 <option value="library" class="option">Library</option>
+                                <option value="lshs" class="option">LSHS</option>
+                                <option value="men" class="option">Men's Dormitory</option>
                                 <option value="ncrdec" class="option">NCRDEC</option>
-                                <option value="new cemds" class="option">New CEMDS</option>
+                                <option value="newCemds" class="option">New CEMDS</option>
+                                <option value="oldCemds" class="option">Old CEMDS</option>
                                 <option value="osas" class="option">OSAS</option>
-                                <option value="old cemds" class="option">Old CEMDS</option>
                                 <option value="physci" class="option">PhySci</option>
+                                <option value="quad" class="option">Quadrangle
                                 <option value="research center" class="option">Research Center</option>
-                                <option value="rolle hall" class="option">Rolle Hall</option>
+                                <option value="rolle" class="option">Rolle Hall</option>
+                                <option value="saka" class="option">Saka</option>
                                 <option value="saluysoy" class="option">Saluysoy</option>
-                                <option value="umall gate" class="option">UMall Gate</option>
+                                <option value="umallGate" class="option">UMall Gate</option>
+                                <option value="women" class="option">Women's Dormitory</option>
                             </select>  
                             <div class="caret container">
                                     <i class="fa-solid fa-caret-down"></i>
@@ -124,36 +146,46 @@
                             <select name="location" id="third-location" class="third select">
                                 <option value="none" disabled selected>Choose destination</option>
                                 <option value="admin" class="option">Admin Building</option>
+                                <option value="agriEco" class="option">Agri Eco Park</option>
+                                <option value="biosci" class="option">BioSci</option>
                                 <option value="cafenr" class="option">CAFENR</option>
                                 <option value="cas" class="option">CAS</option>
+                                <option value="cashier" class="option">Cashier</option>
                                 <option value="ccj" class="option">CCJ</option>
                                 <option value="cdc" class="option">CDC</option>
                                 <option value="ced" class="option">CED</option>
                                 <option value="ceit" class="option">CEIT</option>
+                                <option value="chapel" class="option">Chapel</option>
                                 <option value="con" class="option">CON</option>
                                 <option value="cspear" class="option">CSPEAR</option>
                                 <option value="cvmbs" class="option">CVMBS</option>
                                 <option value="dcee" class="option">DCEE</option>
                                 <option value="diet" class="option">DIET</option>
+                                <option value="dit" class="option">DIT</option>
                                 <option value="gate1" class="option">Gate 1</option>
                                 <option value="gate2" class="option">Gate 2</option>
-                                <option value="grandstand" class="option">Grandstand</option>      
+                                <option value="grandstand" class="option">Grandstand</option>   
+                                <option value="gym" class="option">Gymnasium</option>   
                                 <option value="hostel" class="option">Hostel Tropicana</option>
                                 <option value="icc" class="option">ICC</option>
                                 <option value="ih1" class="option">IH 1</option>
                                 <option value="ih2" class="option">IH 2</option>
                                 <option value="infirmary" class="option">Infirmary</option>
-                                <option value="lshs" class="option">LSHS</option>
                                 <option value="library" class="option">Library</option>
+                                <option value="lshs" class="option">LSHS</option>
+                                <option value="men" class="option">Men's Dormitory</option>
                                 <option value="ncrdec" class="option">NCRDEC</option>
-                                <option value="new cemds" class="option">New CEMDS</option>
+                                <option value="newCemds" class="option">New CEMDS</option>
+                                <option value="oldCemds" class="option">Old CEMDS</option>
                                 <option value="osas" class="option">OSAS</option>
-                                <option value="old cemds" class="option">Old CEMDS</option>
                                 <option value="physci" class="option">PhySci</option>
+                                <option value="quad" class="option">Quadrangle
                                 <option value="research center" class="option">Research Center</option>
-                                <option value="rolle hall" class="option">Rolle Hall</option>
+                                <option value="rolle" class="option">Rolle Hall</option>
+                                <option value="saka" class="option">Saka</option>
                                 <option value="saluysoy" class="option">Saluysoy</option>
-                                <option value="umall gate" class="option">UMall Gate</option>
+                                <option value="umallGate" class="option">UMall Gate</option>
+                                <option value="women" class="option">Women's Dormitory</option>
                             </select>
                             <div class="caret container">
                                     <i class="fa-solid fa-caret-down"></i>
@@ -168,36 +200,46 @@
                             <select name="location" id="fourth-location" class="second select">
                                 <option value="none" disabled selected>Choose destination</option>
                                 <option value="admin" class="option">Admin Building</option>
+                                <option value="agriEco" class="option">Agri Eco Park</option>
+                                <option value="biosci" class="option">BioSci</option>
                                 <option value="cafenr" class="option">CAFENR</option>
                                 <option value="cas" class="option">CAS</option>
+                                <option value="cashier" class="option">Cashier</option>
                                 <option value="ccj" class="option">CCJ</option>
                                 <option value="cdc" class="option">CDC</option>
                                 <option value="ced" class="option">CED</option>
                                 <option value="ceit" class="option">CEIT</option>
+                                <option value="chapel" class="option">Chapel</option>
                                 <option value="con" class="option">CON</option>
                                 <option value="cspear" class="option">CSPEAR</option>
                                 <option value="cvmbs" class="option">CVMBS</option>
                                 <option value="dcee" class="option">DCEE</option>
                                 <option value="diet" class="option">DIET</option>
+                                <option value="dit" class="option">DIT</option>
                                 <option value="gate1" class="option">Gate 1</option>
                                 <option value="gate2" class="option">Gate 2</option>
-                                <option value="grandstand" class="option">Grandstand</option>      
+                                <option value="grandstand" class="option">Grandstand</option>   
+                                <option value="gym" class="option">Gymnasium</option>   
                                 <option value="hostel" class="option">Hostel Tropicana</option>
                                 <option value="icc" class="option">ICC</option>
                                 <option value="ih1" class="option">IH 1</option>
                                 <option value="ih2" class="option">IH 2</option>
                                 <option value="infirmary" class="option">Infirmary</option>
-                                <option value="lshs" class="option">LSHS</option>
                                 <option value="library" class="option">Library</option>
+                                <option value="lshs" class="option">LSHS</option>
+                                <option value="men" class="option">Men's Dormitory</option>
                                 <option value="ncrdec" class="option">NCRDEC</option>
-                                <option value="new cemds" class="option">New CEMDS</option>
+                                <option value="newCemds" class="option">New CEMDS</option>
+                                <option value="oldCemds" class="option">Old CEMDS</option>
                                 <option value="osas" class="option">OSAS</option>
-                                <option value="old cemds" class="option">Old CEMDS</option>
                                 <option value="physci" class="option">PhySci</option>
+                                <option value="quad" class="option">Quadrangle
                                 <option value="research center" class="option">Research Center</option>
-                                <option value="rolle hall" class="option">Rolle Hall</option>
+                                <option value="rolle" class="option">Rolle Hall</option>
+                                <option value="saka" class="option">Saka</option>
                                 <option value="saluysoy" class="option">Saluysoy</option>
-                                <option value="umall gate" class="option">UMall Gate</option>
+                                <option value="umallGate" class="option">UMall Gate</option>
+                                <option value="women" class="option">Women's Dormitory</option>
                             </select>  
                             <div class="caret container">
                                 <i class="fa-solid fa-caret-down"></i>
@@ -212,36 +254,46 @@
                             <select name="location" id="fifth-location" class="second select">
                                 <option value="none" disabled selected>Choose destination</option>
                                 <option value="admin" class="option">Admin Building</option>
+                                <option value="agriEco" class="option">Agri Eco Park</option>
+                                <option value="biosci" class="option">BioSci</option>
                                 <option value="cafenr" class="option">CAFENR</option>
                                 <option value="cas" class="option">CAS</option>
+                                <option value="cashier" class="option">Cashier</option>
                                 <option value="ccj" class="option">CCJ</option>
                                 <option value="cdc" class="option">CDC</option>
                                 <option value="ced" class="option">CED</option>
                                 <option value="ceit" class="option">CEIT</option>
+                                <option value="chapel" class="option">Chapel</option>
                                 <option value="con" class="option">CON</option>
                                 <option value="cspear" class="option">CSPEAR</option>
                                 <option value="cvmbs" class="option">CVMBS</option>
                                 <option value="dcee" class="option">DCEE</option>
                                 <option value="diet" class="option">DIET</option>
+                                <option value="dit" class="option">DIT</option>
                                 <option value="gate1" class="option">Gate 1</option>
                                 <option value="gate2" class="option">Gate 2</option>
-                                <option value="grandstand" class="option">Grandstand</option>      
+                                <option value="grandstand" class="option">Grandstand</option>   
+                                <option value="gym" class="option">Gymnasium</option>   
                                 <option value="hostel" class="option">Hostel Tropicana</option>
                                 <option value="icc" class="option">ICC</option>
                                 <option value="ih1" class="option">IH 1</option>
                                 <option value="ih2" class="option">IH 2</option>
                                 <option value="infirmary" class="option">Infirmary</option>
-                                <option value="lshs" class="option">LSHS</option>
                                 <option value="library" class="option">Library</option>
+                                <option value="lshs" class="option">LSHS</option>
+                                <option value="men" class="option">Men's Dormitory</option>
                                 <option value="ncrdec" class="option">NCRDEC</option>
-                                <option value="new cemds" class="option">New CEMDS</option>
+                                <option value="newCemds" class="option">New CEMDS</option>
+                                <option value="oldCemds" class="option">Old CEMDS</option>
                                 <option value="osas" class="option">OSAS</option>
-                                <option value="old cemds" class="option">Old CEMDS</option>
                                 <option value="physci" class="option">PhySci</option>
+                                <option value="quad" class="option">Quadrangle
                                 <option value="research center" class="option">Research Center</option>
-                                <option value="rolle hall" class="option">Rolle Hall</option>
+                                <option value="rolle" class="option">Rolle Hall</option>
+                                <option value="saka" class="option">Saka</option>
                                 <option value="saluysoy" class="option">Saluysoy</option>
-                                <option value="umall gate" class="option">UMall Gate</option>
+                                <option value="umallGate" class="option">UMall Gate</option>
+                                <option value="women" class="option">Women's Dormitory</option>
                             </select>
                             <div class="caret container">
                                     <i class="fa-solid fa-caret-down"></i>
@@ -263,6 +315,7 @@
 
             <button id="generate-button" class="oblong"onclick="showMap()">SHOW MAP</button>
 
+
             <footer id="footer" class="container c">
                 <input type="checkbox" name="how-to" id="how-to" onclick="showInstructions()">
                 <label for="how-to" id="foot-lbl" class="container foot-lbl">How to use?</label>
@@ -282,9 +335,14 @@
     </div>
 
     <div id="map-container" class="container c">
+        <button id="back-btn" onclick="home()"><img src="./pics/logo 2.png" alt="" width="75px"></button>
+        <div id="map"></div>
+    </div>
+
+    <!-- <div id="map-container" class="container c">
         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3867.922988256832!2d120.88185386849814!3d14.199287501130373!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sph!4v1722178061049!5m2!1sen!2sph" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" id="map"></iframe>
         <button id="back-btn"  onclick="home()"><img src="./pics/logo 2.png" alt="" width="75px"></button>
-    </div>
+    </div> -->
 
     <script src="script.js"></script>
 </body>
