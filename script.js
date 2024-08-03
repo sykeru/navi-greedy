@@ -1,30 +1,8 @@
-
+// Initialize main variables
 let shownLayers = 1;
 const mainContainer = document.getElementById("container");
 const mapContainer = document.getElementById("map-container");
 var mapMarkers;
-
-
-// MAP
-
-let map = L.map('map').setView([14.199962369320243, 120.88165030538508], 17);
-
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            minZoom: 17,
-            maxZoom: 20,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-
-
-let redIcon = new L.Icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
-
 
 let walkingNodes = {
     n1: [14.196277536115117, 120.88048473198177], 
@@ -183,7 +161,7 @@ let drivingNodes = {
     n48: [14.200140525035536, 120.88250921528268],
 };
 
-// SIDE BUTTONS
+// Side button functions 
 
 function showLayers() {
     if (shownLayers >= 2) {
@@ -229,7 +207,7 @@ function remove(layer, select) {
 };
 
 
-// INSTRUCTIONS SA BABA
+// "How to use?" part function
 
 function showInstructions() {
     let box = document.getElementById("how-to");
@@ -245,29 +223,47 @@ function showInstructions() {
     }
 };
 
-// SHOW MAP BUTTON
+// SHOW MAP button function 
 
 function showMap() {
     mainContainer.style.display = "none";
     mapContainer.style.display = "flex";
-    map.invalidateSize()
+    
 
-    var printables = [];
+    // Initialize Leaftlet map, icon, and coordinates
+
+    const map = L.map('map').setView([14.199962369320243, 120.88165030538508], 17);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                minZoom: 17,
+                maxZoom: 20,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+
+    let redIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+    map.invalidateSize()
     mapMarkers = [];
 
     let modes = document.getElementsByName('mode');
     let locations = document.getElementsByClassName("select");
     let options = document.getElementsByClassName("option");
-    let mode
+    var mode;
+    var printables = [];
     
-
     for (let i = 0; i < modes.length; i++) {
         if (modes[i].checked) {
             mode = modes[i].value
         }   
     };
-
-    printables.push(mode)
     
     var Nodes;
 
@@ -277,7 +273,8 @@ function showMap() {
         Nodes = walkingNodes
     }
 
-    let nodesArr = Object.values(Nodes);
+    let nodesValArr = Object.values(Nodes);
+    let nodesKeysArr = Object.keys(Nodes);
 
     for (let i = 0; i < locations.length; i++) {
         let loc = locations[i].value;
@@ -288,10 +285,14 @@ function showMap() {
             mapMarkers.push(marker);
         }
     };
+    
+    console.log(printables);
 
-    // console.log(printables.join(" - "), shownLayers);
+
     return mapMarkers;
 }
+
+// Map page home button function
 
 function home() {
     mainContainer.style.display = "flex";
