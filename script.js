@@ -24,8 +24,22 @@ const redIcon = new L.Icon({
 
 let mapElements = [];
 
-// define coordinates of locations and graph points
+// "How to use?" part functions
+function showInstructions() {
+    let box = document.getElementById("how-to");
+    let instdiv = document.getElementById("instructions-container");
 
+    if (box.checked) {
+        instdiv.style.display = "block";
+        document.getElementById("foot-lbl").style.textDecoration = "underline";
+    
+    } else {
+        instdiv.style.display = "none";
+        document.getElementById("foot-lbl").style.textDecoration = "none";
+    }
+};
+
+// define coordinates of locations and graph points
 const walkingNodes = {
     n1: [14.196277536115117, 120.88048473198177], 
     n2: [14.196386947852886, 120.88101718636738], 
@@ -194,7 +208,6 @@ const drivingNodes = {
 };
 
 // define graph for Dijkstra
-
 const walkingGraph = {
     n1: {n56: 14.253, n2: 58.673, n66: 142.433},
     n2: {n1: 58.673, gate1: 20.847},
@@ -406,7 +419,7 @@ function doDijkstra(graph, start, end) {
 function showLayers() {
     if (shownLayers >= 2) {
         document.getElementById("two-layer").style.display = "flex";
-        document.getElementById("add-text").innerHTML = "Add another destination"
+        document.getElementById("add-text").innerHTML = "Add another destination";
     };
     
     if (shownLayers >= 3){
@@ -438,32 +451,21 @@ function remove(layer, select) {
 };
 
 
-// "How to use?" part functions
-function showInstructions() {
-    let box = document.getElementById("how-to");
-    let instdiv = document.getElementById("instructions-container");
-
-    if (box.checked) {
-        instdiv.style.display = "block";
-        document.getElementById("foot-lbl").style.textDecoration = "underline";
-    
-    } else {
-        instdiv.style.display = "none";
-        document.getElementById("foot-lbl").style.textDecoration = "none";
-    }
-};
-
 // SHOW MAP button function 
 function showMap() {
     map.invalidateSize();
     pageContainer.style.transform = "translateY(calc(-100dvh + 60px))";
-    grayContainer.style.borderRadius = "32px"
+    grayContainer.style.borderRadius = "32px";
 
     logo.style.transform = "translateY(-90px) scale(0.4)";
     logo.disabled = false;
 
-    document.getElementById("footer").style.opacity = "0"
+    document.getElementById("footer").style.opacity = "0";
 
+    // remove all previous markers and polylines
+    for(let i=0; i < mapElements.length; i++) {
+        map.removeLayer(mapElements[i])
+    };
 
     const modes = document.getElementsByName('mode');
     const locations = document.getElementsByClassName("select");
@@ -533,15 +535,10 @@ function home() {
     map.setView([14.199962369320243, 120.88165030538508], 17);
 
     pageContainer.style.transform = "translateY(0)";
-    grayContainer.style.borderRadius = "64px 64px 0 0"
+    grayContainer.style.borderRadius = "64px 64px 0 0";
 
     logo.style.transform = "scale(1)";
     logo.disabled = true;
 
-    document.getElementById("footer").style.opacity = "1"
-
-    // remove all markers and polylines
-    for(let i=0; i < mapElements.length; i++) {
-        map.removeLayer(mapElements[i])
-    };
+    document.getElementById("footer").style.opacity = "1";
 };

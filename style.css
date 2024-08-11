@@ -8,7 +8,6 @@
     overflow: visible;
 }
 
-
 button, label, .oblong, .select {
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
@@ -26,6 +25,9 @@ button, label, .oblong, .select {
 
 #container {
     background-color: #7cab61;
+    position: relative;
+    width: 100vw;
+    height: 100dvh;
 }
 
 /* LOGO */

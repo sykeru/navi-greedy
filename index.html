@@ -6,14 +6,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/graphlib/2.1.8/graphlib.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="./pics/logo 0.png">
     <title>Navi-Greedy</title>
 </head>
 <body>
     <div id="container" class="container c">
-
         <div id="map-container" class="container c">
             <div id="map"></div>
         </div>
@@ -35,7 +33,6 @@
                     <div id="modes-container" class="container r">
                         <input type="radio" name="mode" value="walking" id="walk" class="mode-btn" checked="checked">
                         <label for="walk" id="is-walking" class="container mode-lbl btn">WALKING</label>
-                        
                         <input type="radio" name="mode" value="driving" id="drive" class="mode-btn">
                         <label for="drive" id="is-driving" class="container mode-lbl">DRIVING</label>
                     </div>
@@ -213,7 +210,6 @@
                             <button id="plus" class="+ edit side-btn container" onclick="add()"><i class="fa-solid fa-plus"></i></button>
                         </div>
                     </div>
-    
                 </section>
     
                 <button id="generate-button" class="oblong" onclick="showMap()">SHOW MAP</button>
@@ -230,18 +226,14 @@
                             <li>To <strong>generate a route</strong>, choose an initial location and add a destination.</li>
                             <li>To <strong>add</strong> a destination, click the green (+) button at the right side.</li>
                             <li>To <strong>remove</strong> a destination, click the red (x) button at the right side.</li>
-                            <li>To <strong>edit the sequence</strong> of destinations, drag the gray circle at the left side.</li>
                         </ul>
                     </div>
                 </footer>
             </div>
         </div>  
-    
-
     </div>
 
     
-
     <script src="script.js"></script>
 </body>
 </html>
