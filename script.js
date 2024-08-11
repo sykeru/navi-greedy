@@ -1,10 +1,11 @@
 // initialize main variables
 let shownLayers = 1;
-const mainContainer = document.getElementById("container");
-const mapContainer = document.getElementById("map-container");
+const pageContainer = document.getElementById("page-container");
+const grayContainer = document.getElementById("gray-container");
+const logo = document.getElementById("logo")
 
 // initialize Leaflet map and its elements
-const map = L.map('map').setView([14.199962369320243, 120.88165030538508], 17);
+const map = L.map('map', {zoomControl: false}).setView([14.199962369320243, 120.88165030538508], 17);
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         minZoom: 17,
                         maxZoom: 20,
@@ -244,7 +245,7 @@ const walkingGraph = {
     n47: {n48: 24.658, n77: 14.613, n46: 15.471},
     n48: {n47: 24.658, cas: 24.007},
     n49: {n44: 13.795, hostel: 34.53, n50: 37.496},
-    n50: {n49: 37.496, saluysoy: 21.153, n53: 14.403},
+    n50: {n49: 37.496, saluysoy: 21.153, n53: 14.403, rolle: 53.541},
     icc: {n54: 32.615, n53: 35.481, rolle: 30.066},
     rolle: {icc: 30.066, n53: 48.464, n50: 53.541},
     n53: {n50: 14.403, rolle: 48.464, icc: 35.481, n54: 25.907},
@@ -407,17 +408,9 @@ function showLayers() {
         document.getElementById("two-layer").style.display = "flex";
         document.getElementById("add-text").innerHTML = "Add another destination"
     };
-
+    
     if (shownLayers >= 3){
         document.getElementById("three-layer").style.display = "flex";
-    };
-
-    if (shownLayers >= 4){
-        document.getElementById("four-layer").style.display = "flex";
-    };
-
-    if (shownLayers >= 5){
-        document.getElementById("five-layer").style.display = "flex";
         document.getElementById("add-layer").style.display = "none";
     };
 };
@@ -425,24 +418,23 @@ function showLayers() {
 function add() {
     shownLayers ++;
     showLayers();
-    // console.log(shownLayers)
 };
 
 function remove(layer, select) {
     document.getElementById(select).selectedIndex = 0;
+
     if (layer != "one-layer") {
         document.getElementById(layer).style.display = "none";
-        if (shownLayers == 1) {
-            document.getElementById("add-text").innerHTML = "Add destination"
-        } else if (shownLayers > 1) {
-            shownLayers --;
-        };
+        shownLayers--;
     };
 
-    if (shownLayers < 5) {
+    if (shownLayers < 3) {
         document.getElementById("add-layer").style.display = "flex";
     };
-    // map.removeLayer(mapMarker)
+
+    if (shownLayers < 2) {
+        document.getElementById("add-text").innerHTML = "Add destination";
+    };
 };
 
 
@@ -463,9 +455,15 @@ function showInstructions() {
 
 // SHOW MAP button function 
 function showMap() {
-    mainContainer.style.display = "none";
-    mapContainer.style.display = "flex";
     map.invalidateSize();
+    pageContainer.style.transform = "translateY(calc(-100dvh + 60px))";
+    grayContainer.style.borderRadius = "32px"
+
+    logo.style.transform = "translateY(-90px) scale(0.4)";
+    logo.disabled = false;
+
+    document.getElementById("footer").style.opacity = "0"
+
 
     const modes = document.getElementsByName('mode');
     const locations = document.getElementsByClassName("select");
@@ -499,31 +497,51 @@ function showMap() {
             printables.push(options[index].innerHTML);
             let marker = new L.marker(Nodes[loc], {icon: redIcon}).addTo(map).bindPopup(options[index].innerHTML);
             mapElements.push(marker);
-        }
+        };
     };
+
+    // reverse the travel order so the first polyline would be on top
+    let firstLocation = destinations[0];
+    destinations.reverse();
     
     // do dijkstra between each stops in "destinations list" and create polyline
-    for (let i = 0; i < destinations.length - 1; i++) {
+    for (let i = 1; i < destinations.length; i++) {
         let start = destinations[i];
-        let end = destinations[i + 1];
+        let end = destinations[i - 1];
         route = doDijkstra(Graph, start, end);
+
+        let polylineOpacity = 1.0;
+        let polylineColor;
+
+        if (start === firstLocation) {
+            polylineColor = "blue";
+        } else {
+            polylineColor = "#002366";
+            polylineOpacity = 0.8;
+        };
 
         // create polyline
         for (let stop = 0; stop < route.length - 1; stop++) {
-            polyline = new L.polyline([Nodes[route[stop]], Nodes[route[stop + 1]]], { color: 'blue', weight: 5}).addTo(map);
+            polyline = new L.polyline([Nodes[route[stop]], Nodes[route[stop + 1]]], { weight: 7, color: polylineColor, opacity: polylineOpacity }).addTo(map);
             mapElements.push(polyline);
-            console.log(route[stop], route[stop + 1])
         };
     };
 };
 
-// Map page home button function
+// map page home button function
 function home() {
-    mainContainer.style.display = "flex";
-    mapContainer.style.display = "none";
+    map.setView([14.199962369320243, 120.88165030538508], 17);
+
+    pageContainer.style.transform = "translateY(0)";
+    grayContainer.style.borderRadius = "64px 64px 0 0"
+
+    logo.style.transform = "scale(1)";
+    logo.disabled = true;
+
+    document.getElementById("footer").style.opacity = "1"
 
     // remove all markers and polylines
     for(let i=0; i < mapElements.length; i++) {
         map.removeLayer(mapElements[i])
-    }  
-}
+    };
+};

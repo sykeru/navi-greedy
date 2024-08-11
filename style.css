@@ -8,9 +8,6 @@
     overflow: visible;
 }
 
-body {
-    background-color: #E4E4E3;
-}
 
 button, label, .oblong, .select {
     cursor: pointer;
@@ -27,51 +24,64 @@ button, label, .oblong, .select {
 .c {flex-direction: column;}
 .r {flex-direction: row;}
 
-
 #container {
+    background-color: #7cab61;
+}
+
+/* LOGO */
+#logo {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    transform: translateX(-50%, -50%);
+    z-index: 10;
+}
+
+#page-container {
+    position: relative;
     width: 100vw;
     height: 100dvh;
-    position: relative;
-    align-content: stretch;
+    z-index: 3;
 }
 
 #top-gradient {
     background-image: linear-gradient(#7cab61, #487628);
     position: fixed;
     width: inherit;
-    width: 100vw;
     height: 200px;
 }
 
 #gray-container {
+    /* box-shadow: 0 14px 24px 2px rgba(0, 0, 0, 0.25); */
     background-color: #E4E4E3;
-    border-radius: 64px 64px 0 0;
-    position: absolute;
+    border-radius: 64px 64px 0 0 ;
+    position: relative;
     width: inherit;
+    height: calc(100lvh - 100px);
     top: 100px;
     bottom: 0;
     justify-content: space-between;
 }
 
-#heading, #main-section, #footer {
-    width: inherit;
-    justify-content: center; 
+#map-container {
+    height: calc(100dvh - 75px);
+    position: fixed;
+    bottom: 0;
+    z-index: 2;
+}
+
+#map {
+    width: 100vw;
+    height: inherit;
+    border-radius: 32px 32px 0 0;
 }
 
 /* HEADING */
-
-#logo {
-    position: relative;
-    overflow: visible;
-    margin: -104px 0 -36px 0;
-}
-
-
 h1{
     color: #234423;
     font-weight: 800;
     font-size: 52px;
-    margin: 10px 0;
+    margin: 180px 0 10px 0;
 }
 
 h2 {
@@ -80,7 +90,6 @@ h2 {
 }
 
 /* SECTION */
-
 #modes-container {
     margin: 30px 0;
     width: 275px;
@@ -112,7 +121,6 @@ input[type="radio"]:checked + label {
     border: 0.8px solid transparent;
     color: white;
 }
-
 
 #dropdowns-container {
     padding: 10px 10px;
@@ -215,7 +223,7 @@ select{
 
 footer {
     margin: 20px 0 10px;
-    
+    position: relative;
 }
 
 .foot-lbl {
@@ -235,26 +243,76 @@ input[type="checkbox"], #instructions-container {
 }
 
 
-/* MAP HTML */
+
+/* ANIMATIONS */
+@keyframes slideUp {
+    from {
+        transform: translateY(100dvh);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100dvh);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+* {
+    animation-duration: 0.5s;
+    animation-delay: 0s;
+    animation-fill-mode: both;
+}
+
+button {
+    transition: all 0.5s
+}
+
 #map-container {
-    display: none;
-    flex-direction: column;
-    position:  relative;
+    animation-name: fadeIn;
+    animation-fill-mode: both;
+    animation-duration: 5s;
 }
 
-#map {
-    width: 100vw;
-    height: 100dvh;
-    z-index: 1;
+#page-container, #logo {
+    transition: transform 1s ease-in-out;
 }
 
-#back-btn {
-    background-color: transparent;
-    border: none;
-    width: 75px;
-    height: 75px;
-    margin: 10px;
-    position: absolute;
-    display: flex;
-    z-index: 2;
+#top-gradient {
+    animation-name: slideDown;
 }
+
+#gray-container {
+    animation-name: slideUp;
+    transition: border-radius 1s
+}
+
+#heading, #main-section, #generate-button, #footer {
+    animation: fadeIn 0.8s ease 400ms 1 normal backwards;
+}
+
+.select-layer {
+    animation-name: fadeIn;
+    animation-duration: 0.4s;
+}
+
+#footer {
+    transition: opacity 1s
+}
+
+
