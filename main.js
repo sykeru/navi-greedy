@@ -8,6 +8,7 @@ const logo = document.getElementById("logo")
 // initialize Leaflet map and its elements
 const map = L.map('map', {zoomControl: false}).setView([14.199962369320243, 120.88165030538508], 17);
 
+
 const mtLayer = L.maptilerLayer({
                 apiKey: 'eCwvi5eqVtXNab5U5pNc',
                 style: L.MaptilerStyle.OUTDOOR,
@@ -468,13 +469,13 @@ function showMap() {
     const modes = document.getElementsByName('mode');
     const locations = document.getElementsByClassName("select");
     const options = document.getElementsByClassName("option");
-    let Nodes, Graph;
+    let mode, Nodes, Graph;
     let destinations = [];
 
     // get which mode of transportation is selected    
     for (let i = 0; i < modes.length; i++) {
         if (modes[i].checked) {
-            let mode = modes[i].value;
+            mode = modes[i].value;
         };   
     };
     
@@ -489,11 +490,10 @@ function showMap() {
 
     // get the locations selected then add to the "destinations" list
     for (let i = 0; i < locations.length; i++) {
-        let select = location[i];
-        let loc = select.value;
-        let locName = options[document.getElementById(select.id).selectedIndex - 1].innerHTML;
+        let loc = locations[i].value;
+        let selectedIndex = document.getElementById(locations[i].id).selectedIndex - 1;
         if (loc != "none") {
-            let marker = L.marker(Nodes[loc], {icon: redIcon}).addTo(map).bindPopup(locName, {autoClose: false}).openPopup();
+            let marker = L.marker(Nodes[loc], {icon: redIcon}).addTo(map).bindPopup(options[selectedIndex].innerHTML, {autoClose: false}).openPopup();
             destinations.push(loc);
             mapElements.push(marker);
         };
