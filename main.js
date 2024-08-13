@@ -8,11 +8,12 @@ const logo = document.getElementById("logo")
 // initialize Leaflet map and its elements
 const map = L.map('map', {zoomControl: false}).setView([14.199962369320243, 120.88165030538508], 17);
 
-
-const mtLayer = L.maptilerLayer({
-                apiKey: 'eCwvi5eqVtXNab5U5pNc',
-                style: L.MaptilerStyle.OUTDOOR,
-    }).addTo(map);
+const mLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                minZoom: 17,
+                maxZoom: 20,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                })
+mLayer.addTo(map);
 
 const redIcon = new L.Icon({
     iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
