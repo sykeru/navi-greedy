@@ -8,6 +8,7 @@
     overflow: visible;
 }
 
+
 button, label, .oblong, .select {
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
@@ -22,6 +23,10 @@ button, label, .oblong, .select {
 }
 .c {flex-direction: column;}
 .r {flex-direction: row;}
+
+body {
+    background-color: #E4E4E3;
+}
 
 #container {
     background-color: #7cab61;
@@ -300,20 +305,16 @@ button {
 
 #gray-container {
     animation-name: slideUp;
-    transition: border-radius 1s
+    transition: border-radius 1s;
 }
 
-#heading, #main-section, #generate-button, #footer {
+#gray-container > * {
     animation: fadeIn 0.8s ease 400ms 1 normal backwards;
+    transition: opacity 1s;
+    -o-transition-delay: 1s;
 }
 
 .select-layer {
     animation-name: fadeIn;
     animation-duration: 0.4s;
 }
-
-#footer {
-    transition: opacity 1s
-}
-
-
