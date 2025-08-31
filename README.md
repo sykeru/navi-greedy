@@ -1,5 +1,5 @@
 # Navi-Greedy
-Navi-Greedy is a proposed application for navigating the Cavite State University main campus located in Bancod, Indang, Cavite, Philippines utilizing a Greedy technique: Dijkstra's algorithm to provide the shortest route between locations within the campus. 
+Navi-Greedy, as proposed, is a mobile application for navigating the Cavite State University main campus located in Bancod, Indang, Cavite, Philippines utilizing a Greedy technique: Dijkstra's algorithm to provide the shortest route between locations within the campus. 
 
 This application was originally developed as a desktop application using Python and its Tkinter library. The developers were Dann Lineses, Mark Jamir Papa, and Warreon Dave Mojica.
 
