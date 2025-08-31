@@ -15,16 +15,23 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="./pics/logo 0.png">
     <title>Navi-Greedy</title>
+
 </head>
 <body>
     <div id="container" class="container c">
         <div id="map-container" class="container c">
             <div id="map"></div>
+            <button id="back" class="oblong z" onclick = "back()" >BACK</button>
         </div>
 
-        <button id="logo" class="container" onclick = "home()" disabled>
+
+
+        <div id="logo" class="container r" onclick = "back()" disabled>
             <img src="./pics/logo 2.png" alt="Navi-Greedy logo here" id="logo-pic" width="320px">
-        </button>
+            
+        </div>
+
+        
 
         <div id="page-container">
             <div id="top-gradient" class="gradient-bg"></div>
@@ -50,8 +57,10 @@
                                     <option value="none" disabled selected>Choose location</option>
                                     <option value="admin" class="option">Admin Building</option>
                                     <option value="agriEco" class="option">Agri Eco Park</option>
+                                    <option value="ansci" class="option">Animal Science</option>
                                     <option value="biosci" class="option">BioSci</option>
                                     <option value="cafenr" class="option">CAFENR</option>
+                                    <option value="cafsev" class="option">Cafe Severino</option>
                                     <option value="cas" class="option">CAS</option>
                                     <option value="cashier" class="option">Cashier</option>
                                     <option value="ccj" class="option">CCJ</option>
@@ -60,13 +69,14 @@
                                     <option value="ceit" class="option">CEIT</option>
                                     <option value="chapel" class="option">Chapel</option>
                                     <option value="con" class="option">CON</option>
-                                    <option value="gym" class="option">CSPEAR</option>
+                                    <option value="cspear" class="option">CSPEAR</option>
                                     <option value="cvmbs" class="option">CVMBS</option>
                                     <option value="dcee" class="option">DCEE</option>
                                     <option value="diet" class="option">DIET</option>
                                     <option value="dit" class="option">DIT</option>
                                     <option value="gate1" class="option">Gate 1</option>
                                     <option value="gate2" class="option">Gate 2</option>
+                                    <option value="gate3" class="option">Gate 3</option>
                                     <option value="grandstand" class="option">Grandstand</option>   
                                     <option value="gym" class="option">Gymnasium</option>   
                                     <option value="hostel" class="option">Hostel Tropicana</option>
@@ -76,6 +86,7 @@
                                     <option value="infirmary" class="option">Infirmary</option>
                                     <option value="library" class="option">Library</option>
                                     <option value="lshs" class="option">LSHS</option>
+                                    <option value="landbank" class="option">Landbank ATM Machine</option>
                                     <option value="men" class="option">Men's Dormitory</option>
                                     <option value="ncrdec" class="option">NCRDEC</option>
                                     <option value="newCemds" class="option">New CEMDS</option>
@@ -87,8 +98,10 @@
                                     <option value="rolle" class="option">Rolle Hall</option>
                                     <option value="saka" class="option">Saka</option>
                                     <option value="saluysoy" class="option">Saluysoy</option>
-                                    <option value="tdf" class="option">Tech Demo Farm</option>
-                                    <option value="umallGate" class="option">UMall Gate</option>
+                                    <option value="shs" class="option">SHS</option>
+                                    <option value="sprint" class="option">Sprint Center </option>
+                                    <option value="tdf" class="option">TDF</option>
+                                    <option value="umall" class="option">University Mall</option>
                                     <option value="women" class="option">Women's Dormitory</option>
                                 </select>
                                 <div class="caret container">
@@ -102,11 +115,13 @@
                             <button class="grips side-btn container" disabled><i class="fa-regular fa-circle"></i></button>
                             <div class="container r oblong">
                                 <select name="location" id="second-location" class="second select">
-                                    <option value="none" disabled selected>Choose destination</option>
+                                    <option value="none" disabled selected>Choose location</option>
                                     <option value="admin" class="option">Admin Building</option>
                                     <option value="agriEco" class="option">Agri Eco Park</option>
+                                    <option value="ansci" class="option">Animal Science</option>
                                     <option value="biosci" class="option">BioSci</option>
                                     <option value="cafenr" class="option">CAFENR</option>
+                                    <option value="cafsev" class="option">Cafe Severino</option>
                                     <option value="cas" class="option">CAS</option>
                                     <option value="cashier" class="option">Cashier</option>
                                     <option value="ccj" class="option">CCJ</option>
@@ -115,13 +130,14 @@
                                     <option value="ceit" class="option">CEIT</option>
                                     <option value="chapel" class="option">Chapel</option>
                                     <option value="con" class="option">CON</option>
-                                    <option value="gym" class="option">CSPEAR</option>
+                                    <option value="cspear" class="option">CSPEAR</option>
                                     <option value="cvmbs" class="option">CVMBS</option>
                                     <option value="dcee" class="option">DCEE</option>
                                     <option value="diet" class="option">DIET</option>
                                     <option value="dit" class="option">DIT</option>
                                     <option value="gate1" class="option">Gate 1</option>
                                     <option value="gate2" class="option">Gate 2</option>
+                                    <option value="gate3" class="option">Gate 3</option>
                                     <option value="grandstand" class="option">Grandstand</option>   
                                     <option value="gym" class="option">Gymnasium</option>   
                                     <option value="hostel" class="option">Hostel Tropicana</option>
@@ -131,6 +147,7 @@
                                     <option value="infirmary" class="option">Infirmary</option>
                                     <option value="library" class="option">Library</option>
                                     <option value="lshs" class="option">LSHS</option>
+                                    <option value="landbank" class="option">Landbank ATM Machine</option>
                                     <option value="men" class="option">Men's Dormitory</option>
                                     <option value="ncrdec" class="option">NCRDEC</option>
                                     <option value="newCemds" class="option">New CEMDS</option>
@@ -142,8 +159,10 @@
                                     <option value="rolle" class="option">Rolle Hall</option>
                                     <option value="saka" class="option">Saka</option>
                                     <option value="saluysoy" class="option">Saluysoy</option>
-                                    <option value="tdf" class="option">Tech Demo Farm</option>
-                                    <option value="umallGate" class="option">UMall Gate</option>
+                                    <option value="shs" class="option">SHS</option>
+                                    <option value="sprint" class="option">Sprint Center </option>
+                                    <option value="tdf" class="option">TDF</option>
+                                    <option value="umall" class="option">University Mall</option>
                                     <option value="women" class="option">Women's Dormitory</option>
                                 </select>  
                                 <div class="caret container">
@@ -157,11 +176,13 @@
                             <button class="grips side-btn container" disabled><i class="fa-regular fa-circle"></i></button>
                             <div class="container r oblong">
                                 <select name="location" id="third-location" class="third select">
-                                    <option value="none" disabled selected>Choose destination</option>
+                                    <option value="none" disabled selected>Choose location</option>
                                     <option value="admin" class="option">Admin Building</option>
                                     <option value="agriEco" class="option">Agri Eco Park</option>
+                                    <option value="ansci" class="option">Animal Science</option>
                                     <option value="biosci" class="option">BioSci</option>
                                     <option value="cafenr" class="option">CAFENR</option>
+                                    <option value="cafsev" class="option">Cafe Severino</option>
                                     <option value="cas" class="option">CAS</option>
                                     <option value="cashier" class="option">Cashier</option>
                                     <option value="ccj" class="option">CCJ</option>
@@ -170,13 +191,14 @@
                                     <option value="ceit" class="option">CEIT</option>
                                     <option value="chapel" class="option">Chapel</option>
                                     <option value="con" class="option">CON</option>
-                                    <option value="gym" class="option">CSPEAR</option>
+                                    <option value="cspear" class="option">CSPEAR</option>
                                     <option value="cvmbs" class="option">CVMBS</option>
                                     <option value="dcee" class="option">DCEE</option>
                                     <option value="diet" class="option">DIET</option>
                                     <option value="dit" class="option">DIT</option>
                                     <option value="gate1" class="option">Gate 1</option>
                                     <option value="gate2" class="option">Gate 2</option>
+                                    <option value="gate3" class="option">Gate 3</option>
                                     <option value="grandstand" class="option">Grandstand</option>   
                                     <option value="gym" class="option">Gymnasium</option>   
                                     <option value="hostel" class="option">Hostel Tropicana</option>
@@ -186,6 +208,7 @@
                                     <option value="infirmary" class="option">Infirmary</option>
                                     <option value="library" class="option">Library</option>
                                     <option value="lshs" class="option">LSHS</option>
+                                    <option value="landbank" class="option">Landbank ATM Machine</option>
                                     <option value="men" class="option">Men's Dormitory</option>
                                     <option value="ncrdec" class="option">NCRDEC</option>
                                     <option value="newCemds" class="option">New CEMDS</option>
@@ -197,8 +220,10 @@
                                     <option value="rolle" class="option">Rolle Hall</option>
                                     <option value="saka" class="option">Saka</option>
                                     <option value="saluysoy" class="option">Saluysoy</option>
-                                    <option value="tdf" class="option">Tech Demo Farm</option>
-                                    <option value="umallGate" class="option">UMall Gate</option>
+                                    <option value="shs" class="option">SHS</option>
+                                    <option value="sprint" class="option">Sprint Center </option>
+                                    <option value="tdf" class="option">TDF</option>
+                                    <option value="umall" class="option">University Mall</option>
                                     <option value="women" class="option">Women's Dormitory</option>
                                 </select>
                                 <div class="caret container">
@@ -218,25 +243,27 @@
                     </div>
                 </section>
     
-                <button id="generate-button" class="oblong z" onclick="showMap()">SHOW MAP</button>
+                <button id="show-map-button" class="oblong z" onclick="showMap()">SHOW MAP</button>
     
                 <footer id="footer" class="container c z">
                     <input type="checkbox" name="how-to" id="how-to" onclick="showInstructions()">
                     <label for="how-to" id="foot-lbl" class="container foot-lbl">How to use?</label>
                     <div id="instructions-container" class="container c">
                         <ul id="list">
-                            <li>Change your <strong>mode of transportation</strong> whether you are walking or in/on a vehicle while traveling around the campus.</li>
-                            <li><strong>View the map</strong> by pressing the "SHOW MAP" button.</li>
-                            <li>To <strong>search a location</strong>, choose a location then press the "SHOW MAP" button without adding a destination.</li>
-                            <li>To <strong>generate a route</strong>, choose an initial location and add a destination.</li>
-                            <li>To <strong>add</strong> a destination, click the green (+) button at the right side.</li>
-                            <li>To <strong>remove</strong> a destination, click the red (x) button at the right side.</li>
+                            <li>Choose your <strong>mode of transportation</strong> — walking or driving (or riding a vehicle) around the campus.</li>
+                            <li><strong>Open the map</strong> by pressing the "SHOW MAP" button.</li>
+                            <li><strong>Go back to home page</strong> by pressing the "BACK" button.</li> 
+                            <li><strong>Search for a location</strong>by selecting one under the dropdown menu.</li>
+                            <li><strong>Generate routes</strong>by adding one or more destination.</li>
+                            <li>To <strong>add</strong> a destination, click the "Add destination" button or the green (+) button.</li>
+                            <li>To <strong>remove</strong> a location, click the red (x) button beside the location that you wish to remove.</li>
                         </ul>
                     </div>
                 </footer>
             </div>
         </div>  
     </div>
+
 
     <script src="main.js"></script>
 </body>

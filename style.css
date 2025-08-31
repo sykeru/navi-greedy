@@ -44,6 +44,28 @@ body {
     z-index: 10;
 }
 
+/* BACK BUTTON */
+#back {
+    font-size: 12px; 
+    font-weight: 700;
+    border-radius: 50px;
+    width: 112px;
+    height: 28px;
+    justify-content: center;
+    background-color: #589B56;
+    box-shadow: 0 2px 14px 1px rgba(0, 0, 0, 0.25);
+    border: 0.8px solid transparent;
+    color: white;
+    position: absolute; 
+    top: 50px;             
+    z-index: 9999;         
+}
+
+#back:active {
+    opacity: 0.9;
+    transform: scale(0.60);
+}
+
 #page-container {
     position: relative;
     width: 100vw;
@@ -76,6 +98,7 @@ body {
     z-index: 2;
 }
 
+
 #map {
     width: 100vw;
     height: 100%;
@@ -94,6 +117,8 @@ h2 {
     font-size: 14px;
     margin: 0 0;
 }
+
+
 
 /* SECTION */
 #modes-container {
@@ -153,7 +178,7 @@ select{
     border: none;
     border-radius: 22px;
     appearance: none;
-    width: 100%;
+    width: 50rem;
     height: 100%;
     padding: 0 0 0 22px ;
     font-size: 16px;
@@ -211,7 +236,7 @@ select{
 .fa-plus {color: #7DB64C;}
 
 
-#generate-button {
+#show-map-button {
     color: white;
     background-color: #589B56;
     font-size: 26px;
@@ -222,7 +247,7 @@ select{
     box-shadow: 0px 2px 14px 1px rgba(3, 63, 8, 0.25);
 }
 
-#generate-button:active {
+#show-map-button:active {
     opacity: 0.9;
     transform: scale(0.90);
 }
